@@ -1,0 +1,83 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558 
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "debug build",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-std=c++17",
+                "-Wshadow",
+                "-Wall",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/out/${fileBasenameNoExtension}.out",
+                "-D_GLIBCXX_DEBUG"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "build",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-std=c++17",
+                "-Wshadow",
+                "-Wall",
+                "${file}",
+                "-o",
+                "${fileDirname}/out/${fileBasenameNoExtension}.out",
+                "-O2",
+                "-Wno-unused-result"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "run",
+            "command": "${fileDirname}/out/${fileBasenameNoExtension}.out",
+            "dependsOn": [
+                "build"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "frun",
+            "command": "${fileDirname}/out/${fileBasenameNoExtension}.out",
+            "args": [
+                "<",
+                "in",
+            ],
+            "dependsOn": [
+                "build"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
