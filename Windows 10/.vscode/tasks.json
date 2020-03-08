@@ -1,4 +1,9 @@
+//Cpp build script---
+//Shanto Noor
+//Location: workspace\.vscode
 {
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
@@ -15,9 +20,6 @@
                 "${fileDirname}\\exe\\${fileBasenameNoExtension}.exe",
                 "-D_GLIBCXX_DEBUG",
             ],
-            "options": {
-                "cwd": "C:\\Program Files (x86)\\mingw-w64\\i686-8.1.0-posix-dwarf-rt_v6-rev0\\mingw32\\bin"
-            },
             "problemMatcher": [
                 "$gcc"
             ]
@@ -36,9 +38,6 @@
                 "-O2",
                 "-Wno-unused-result"
             ],
-            "options": {
-                "cwd": "C:\\Program Files (x86)\\mingw-w64\\i686-8.1.0-posix-dwarf-rt_v6-rev0\\mingw32\\bin"
-            },
             "problemMatcher": [
                 "$gcc"
             ],
@@ -46,7 +45,60 @@
         {
             "type": "shell",
             "label": "run",
+            "command": "start cmd /c \"title ${fileBasenameNoExtension}.exe & \"${fileDirname}\\exe\\${fileBasenameNoExtension}.exe\" & echo. & echo. & echo --Visual Studio Code C++ Build Script By-- & echo ---------------Shanto Noor!--------------- & echo. & pause\"",
+            "dependsOn": [
+                "build"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "ifrun",
             "command": "${fileDirname}\\exe\\${fileBasenameNoExtension}.exe",
+            "args": [
+                "<",
+                "input.txt",
+            ],
+            "dependsOn": [
+                "build"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "icfrun",
+            "command": "start cmd /c \"title ${fileBasenameNoExtension}.exe & \"${fileDirname}\\exe\\${fileBasenameNoExtension}.exe\" < input.txt & echo. & echo. & echo --Visual Studio Code C++ Build Script By-- & echo ---------------Shanto Noor!--------------- & echo. & pause\"",
+            "dependsOn": [
+                "build"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "iofrun",
+            "command": "${fileDirname}\\exe\\${fileBasenameNoExtension}.exe",
+            "args": [
+                "<",
+                "input.txt>output.txt",
+            ],
             "dependsOn": [
                 "build"
             ],
@@ -68,9 +120,6 @@
                 "-o",
                 "${fileDirname}\\exe\\${fileBasenameNoExtension}.exe",
             ],
-            "options": {
-                "cwd": "C:\\Program Files (x86)\\mingw-w64\\i686-8.1.0-posix-dwarf-rt_v6-rev0\\mingw32\\bin"
-            },
             "problemMatcher": [
                 "$gcc"
             ]
@@ -84,9 +133,6 @@
                 "-o",
                 "${fileDirname}\\exe\\${fileBasenameNoExtension}.exe",
             ],
-            "options": {
-                "cwd": "C:\\Program Files (x86)\\mingw-w64\\i686-8.1.0-posix-dwarf-rt_v6-rev0\\mingw32\\bin"
-            },
             "problemMatcher": [
                 "$gcc"
             ],
@@ -94,7 +140,7 @@
         {
             "type": "shell",
             "label": "nrun",
-            "command": "${fileDirname}\\exe\\${fileBasenameNoExtension}.exe",
+            "command": "start cmd /c \"title ${fileBasenameNoExtension}.exe & \"${fileDirname}\\exe\\${fileBasenameNoExtension}.exe\" & echo. & echo. & echo --Visual Studio Code C++ Build Script By-- & echo ---------------Shanto Noor!--------------- & echo. & pause\"",
             "dependsOn": [
                 "nbuild"
             ],
@@ -112,9 +158,6 @@
                 "-o",
                 "${fileDirname}\\exe\\${fileBasenameNoExtension}.exe",
             ],
-            "options": {
-                "cwd": "C:\\Program Files (x86)\\mingw-w64\\i686-8.1.0-posix-dwarf-rt_v6-rev0\\mingw32\\bin"
-            },
             "problemMatcher": [
                 "$gcc"
             ],
@@ -122,32 +165,13 @@
         {
             "type": "shell",
             "label": "crun",
-            "command": "${fileDirname}\\exe\\${fileBasenameNoExtension}.exe",
+            "command": "start cmd /c \"title ${fileBasenameNoExtension}.exe & \"${fileDirname}\\exe\\${fileBasenameNoExtension}.exe\" & echo. & echo. & echo --Visual Studio Code C++ Build Script By-- & echo ---------------Shanto Noor!--------------- & echo. & pause\"",
             "dependsOn": [
                 "cbuild"
             ],
             "problemMatcher": [
                 "$gcc"
             ],
-        },
-        {
-            "type": "shell",
-            "label": "frun",
-            "command": "${fileDirname}\\exe\\${fileBasenameNoExtension}.exe",
-            "args": [
-                "<",
-                "in",
-            ],
-            "dependsOn": [
-                "build"
-            ],
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
         }
     ]
 }
