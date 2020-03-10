@@ -6,7 +6,7 @@
         {
             "type": "shell",
             "label": "debug build",
-            "command": "/usr/bin/g++",
+            "command": "g++",
             "args": [
                 "-std=c++17",
                 "-Wshadow",
@@ -17,9 +17,6 @@
                 "${fileDirname}/out/${fileBasenameNoExtension}.out",
                 "-D_GLIBCXX_DEBUG"
             ],
-            "options": {
-                "cwd": "/usr/bin"
-            },
             "problemMatcher": [
                 "$gcc"
             ]
@@ -27,7 +24,7 @@
         {
             "type": "shell",
             "label": "build",
-            "command": "/usr/bin/g++",
+            "command": "g++",
             "args": [
                 "-std=c++17",
                 "-Wshadow",
@@ -38,12 +35,24 @@
                 "-O2",
                 "-Wno-unused-result"
             ],
-            "options": {
-                "cwd": "/usr/bin"
-            },
             "problemMatcher": [
                 "$gcc"
             ]
+        },
+        {
+            "type": "shell",
+            "label": "krun",
+            "command": "konsole --hold -e \"${fileDirname}/out/${fileBasenameNoExtension}.out\"",
+            "dependsOn": [
+                "build"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             "type": "shell",
@@ -62,11 +71,30 @@
         },
         {
             "type": "shell",
-            "label": "frun",
+            "label": "ifrun",
             "command": "${fileDirname}/out/${fileBasenameNoExtension}.out",
             "args": [
                 "<",
-                "in",
+                "input.txt",
+            ],
+            "dependsOn": [
+                "build"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "iofrun",
+            "command": "${fileDirname}/out/${fileBasenameNoExtension}.out",
+            "args": [
+                "<",
+                "input.txt>output.txt",
             ],
             "dependsOn": [
                 "build"
